@@ -66,12 +66,10 @@ yarn package
 
 MIT © [Electron React Boilerplate](https://github.com/electron-react-boilerplate)
 
-[github-actions-status]: https://github.com/electron-react-boilerplate/electron-react-boilerplate/workflows/Test/badge.svg
-[github-actions-url]: https://github.com/electron-react-boilerplate/electron-react-boilerplate/actions
+[github-actions-status]: https://github.com/sunnydave/odyssey/workflows/Test/badge.svg
+[github-actions-url]: https://github.com/sunnydave/odyssey/actions
 [github-tag-image]: https://img.shields.io/github/tag/electron-react-boilerplate/electron-react-boilerplate.svg?label=version
-[github-tag-url]: https://github.com/electron-react-boilerplate/electron-react-boilerplate/releases/latest
-[stackoverflow-img]: https://img.shields.io/badge/stackoverflow-electron_react_boilerplate-blue.svg
-[stackoverflow-url]: https://stackoverflow.com/questions/tagged/electron-react-boilerplate
+[github-tag-url]: https://github.com/sunnydave/odyssey/releases/latest
 [david-image]: https://img.shields.io/david/electron-react-boilerplate/electron-react-boilerplate.svg
 [david-url]: https://david-dm.org/electron-react-boilerplate/electron-react-boilerplate
 [david-dev-image]: https://img.shields.io/david/dev/electron-react-boilerplate/electron-react-boilerplate.svg?label=devDependencies
