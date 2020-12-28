@@ -11,7 +11,14 @@
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
-import { app, BrowserWindow } from 'electron';
+import fs from 'fs';
+import {
+  app,
+  BrowserWindow,
+  ipcMain,
+  Notification,
+  ipcRenderer,
+} from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -78,9 +85,14 @@ const createWindow = async () => {
       process.env.ERB_SECURE !== 'true'
         ? {
             nodeIntegration: true,
+            webviewTag: true,
+            enableRemoteModule: true,
           }
         : {
             preload: path.join(__dirname, 'dist/renderer.prod.js'),
+            nodeIntegration: true,
+            webviewTag: true,
+            enableRemoteModule: true,
           },
   });
 
@@ -135,4 +147,34 @@ app.on('activate', () => {
   // On macOS it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) createWindow();
+});
+
+ipcMain.on('app-notification', (event, args) => {
+  const notification = new Notification({
+    title: args.title,
+    body: args.body,
+    icon: args.icon,
+  });
+  notification.show();
+  notification.on('click', () => {
+    event.sender.send('notification-click', {
+      appId: args.appId,
+      tabId: args.tabId,
+    });
+  });
+});
+
+ipcMain.handle('loadData', async (event, filename) => {
+  const userDataPath = app.getPath('userData');
+  const filePath = path.join(userDataPath, `${filename}.json`);
+  fs.writeFileSync(filePath, '', { flag: 'a' });
+  const data = fs.readFileSync(filePath);
+  return data.length > 0 ? JSON.parse(data) : null;
+});
+
+ipcMain.handle('saveData', async (event, filename, data) => {
+  const userDataPath = app.getPath('userData');
+  const filePath = path.join(userDataPath, `${filename}.json`);
+  fs.writeFileSync(filePath, JSON.stringify(data, null, 4));
+  return true;
 });

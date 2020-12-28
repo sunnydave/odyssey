@@ -1,0 +1,17 @@
+.appMenu {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  background: #232c39;
+  border-radius: 10px;
+}
+.appMenuItem {
+  cursor: pointer;
+  padding: 10px;
+
+  /* border-bottom: 1px solid rgb(187, 187, 187); */
+}
+.appMenuItem:hover {
+  background: #2a476e;
+  border-radius: 10px;
+}

@@ -1,0 +1,63 @@
+.container {
+  margin-left: 65px;
+}
+
+.showTabs {
+  display: block;
+  margin-left: -6px;
+}
+
+.hideTabs {
+  display: none;
+}
+
+.addTabButton {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-left: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.tabPanel {
+  display: none;
+  z-index: 2;
+  position: relative;
+}
+
+.tabPanelSelect {
+  box-shadow: 2px -1px 2px 0 rgba(0, 0, 0, 0.5);
+  display: block;
+}
+
+.tab {
+  display: inline-block;
+  position: relative;
+  list-style: none;
+  padding: 6px 12px 0;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+  margin-right: 2px;
+  margin-bottom: 2px;
+  height: 25px;
+  color: lightgrey;
+}
+
+.tabSelected {
+  background: #232c39;
+  border: #232c39 1px solid;
+  color: white;
+  z-index: 3;
+}
+
+.tabList {
+  margin: 10px 0 0 0;
+  padding: 0;
+}
+
+.tabIcon {
+  width: 20px;
+  margin-right: 5px;
+  margin-bottom: -5px;
+}

@@ -1,0 +1,20 @@
+{
+  "type": "appGroup/addAppGroup",
+  "payload": {
+    "name": "Monday.com",
+    "icon": "https://cdn.nerdyandnoisy.com/NaNSpace/monday-logo.png",
+    "appUrl": "https://www.monday.com",
+    "separateSession": true,
+    "id": "d6097a57-4d96-4e15-8dc0-8e5bbf2acb15",
+    "openTabs": [
+      {
+        "id": "4eebad14-ac71-4b75-aa96-3866a6f27e34",
+        "url": "https://www.monday.com",
+        "title": "https://www.monday.com",
+        "favIcon": ""
+      }
+    ],
+    "activeTab": "4eebad14-ac71-4b75-aa96-3866a6f27e34",
+    "activeTabIndex": 0
+  }
+}

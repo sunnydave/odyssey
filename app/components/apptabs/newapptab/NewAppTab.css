@@ -1,0 +1,27 @@
+.container {
+  height: 5vh;
+}
+.urlInput {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 95vw;
+  height: 20px;
+  background: #232c39;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  font-size: medium;
+  padding: 5px;
+}
+.urlInputWithSuffix {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: 50vw;
+  height: 20px;
+  background: #232c39;
+  border: 0;
+  border-radius: 15px;
+  color: white;
+  font-size: medium;
+  padding: 5px;
+}

@@ -1,0 +1,102 @@
+.sidenav {
+  height: 100%;
+  width: 65px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  background: #232c39;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+}
+
+.button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 10px;
+}
+
+.button i {
+  color: yellowgreen;
+}
+
+.modal {
+  font-size: 12px;
+  background: #232c39;
+  padding: 5px;
+  border-radius: 4px;
+}
+.modal > .header {
+  width: 100%;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.appGroupButton {
+  width: 65px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.appGroupButtonActive {
+  width: 65px;
+  background: #2a476e;
+  border: none;
+  border-radius: 15px;
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.appGroupIcon {
+  width: 50px;
+}
+
+.appMenu {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  background: #232c39;
+}
+.appMenuItem {
+  cursor: pointer;
+  padding: 5px;
+  height: 28px;
+
+  /* border-bottom: 1px solid rgb(187, 187, 187); */
+}
+.appMenuItem:hover {
+  background: #2a476e;
+}
