@@ -6,7 +6,7 @@ import { RootState } from '../../store';
 const appGroupSlice = createSlice({
   name: 'appGroup',
   // initialState: { appGroups: FileUtils.loadData('userApps.json') },
-  initialState: { apps: [], activeApp: '' },
+  initialState: { apps: [] as any, activeApp: '' },
   reducers: {
     setInitialState: (state, payloadAction) => {
       const { loadedApps, loadedActiveApp } = payloadAction.payload;
@@ -37,58 +37,79 @@ const appGroupSlice = createSlice({
     deleteApp: (state, payloadAction) => {
       const { appId } = payloadAction.payload;
       const selectedAppIndex = state.apps.findIndex(
-        (stateApp) => stateApp.id === appId
+        (stateApp: any) => stateApp.id === appId
       );
       if (selectedAppIndex > -1) {
         state.apps.splice(selectedAppIndex, 1);
       }
       if (state.activeApp === appId && state.apps.length > 0) {
-        state.activeApp = state.apps[0].id;
+        const firstApp: any = state.apps[0];
+        state.activeApp = firstApp.id;
       }
     },
     newTab: (state, payloadAction) => {
       const { appId, tabUrl, tabTitle } = payloadAction.payload;
       const newTabId = uuidv4();
-      const selectedApp = state.apps.find((stateApp) => stateApp.id === appId);
-      selectedApp.openTabs.push({
-        id: newTabId,
-        url: tabUrl,
-        title: tabTitle,
-        favIcon: '',
-      });
-      selectedApp.activeTab = newTabId;
-      selectedApp.activeTabIndex = selectedApp.openTabs.length - 1;
+      const selectedApp: any = state.apps.find(
+        (stateApp: any) => stateApp.id === appId
+      );
+      if (selectedApp) {
+        selectedApp.openTabs.push({
+          id: newTabId,
+          url: tabUrl,
+          title: tabTitle,
+          favIcon: '',
+        });
+        selectedApp.activeTab = newTabId;
+        selectedApp.activeTabIndex = selectedApp.openTabs.length - 1;
+      }
     },
     closeTab: (state, payloadAction) => {
       const { appId, tabId } = payloadAction.payload;
-      const selectedApp = state.apps.find((stateApp) => stateApp.id === appId);
-      const tabIndex = selectedApp.openTabs.findIndex(
-        (appTab) => appTab.id === tabId
+      const selectedApp: any = state.apps.find(
+        (stateApp: any) => stateApp.id === appId
       );
-      if (tabIndex === selectedApp.activeTabIndex) {
-        selectedApp.activeTabIndex = 0;
+      if (selectedApp) {
+        const tabIndex = selectedApp.openTabs.findIndex(
+          (appTab: any) => appTab.id === tabId
+        );
+        if (tabIndex === selectedApp.activeTabIndex) {
+          selectedApp.activeTabIndex = 0;
+        }
+        selectedApp.openTabs.splice(tabIndex, 1);
       }
-      selectedApp.openTabs.splice(tabIndex, 1);
     },
     updateTab: (state, payloadAction) => {
       const { appId, tabId, tabUrl, tabIcon, tabTitle } = payloadAction.payload;
-      const selectedApp = state.apps.find((stateApp) => stateApp.id === appId);
-      const selectedTab = selectedApp.openTabs.find((tab) => tab.id === tabId);
-      if (tabUrl) {
-        selectedTab.url = tabUrl;
-        selectedTab.title = tabUrl;
-      }
-      if (tabIcon) {
-        selectedTab.favIcon = tabIcon;
-      }
-      if (tabTitle) {
-        selectedTab.title = tabTitle;
+      const selectedApp: any = state.apps.find(
+        (stateApp: any) => stateApp.id === appId
+      );
+      if (selectedApp) {
+        const selectedTab = selectedApp.openTabs.find(
+          (tab: any) => tab.id === tabId
+        );
+        if (selectedTab) {
+          if (tabUrl) {
+            selectedTab.url = tabUrl;
+            selectedTab.title = tabUrl;
+          }
+          if (tabIcon) {
+            selectedTab.favIcon = tabIcon;
+          }
+          if (tabTitle) {
+            selectedTab.title = tabTitle;
+          }
+        }
       }
     },
     changeTabSelection: (state, payloadAction) => {
       const { appId, index } = payloadAction.payload;
-      const selectedApp = state.apps.find((stateApp) => stateApp.id === appId);
-      selectedApp.activeTabIndex = index;
+      const selectedApp: any = state.apps.find(
+        (stateApp: any) => stateApp.id === appId
+      );
+      if (selectedApp) {
+        selectedApp.activeTabIndex = index;
+      }
     },
   },
 });

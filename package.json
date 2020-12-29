@@ -98,9 +98,9 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "odyssey",
+      "owner": "sunnydave",
       "repo": "odyssey",
-      "private": false
+      "private": true
     }
   },
   "repository": {
@@ -194,6 +194,7 @@
     "@types/webpack-env": "^1.15.2",
     "@typescript-eslint/eslint-plugin": "^3.6.1",
     "@typescript-eslint/parser": "^3.6.1",
+    "@types/uuid": "^8.3.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.1.0",
     "babel-loader": "^8.1.0",

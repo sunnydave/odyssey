@@ -22,7 +22,7 @@ export default function SideNav() {
     <div>
       <div className={styles.sidenav}>
         <header>
-          {apps.map((app) => (
+          {apps.map((app: any) => (
             <>
               <button
                 key={app.id}

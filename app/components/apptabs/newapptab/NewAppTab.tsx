@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import styles from './NewAppTab.css';
 import { updateTab } from '../../../features/apps/appGroupSlice';
 
-export default function NewAppTab(props) {
+export default function NewAppTab(props: any) {
   const dispatch = useDispatch();
   const [url, setUrl] = useState('');
   const { appId, tabId, urlSuffix, urlPlaceholder } = props;
-  const handleUrlChange = (event) => {
+  const handleUrlChange = (event: ChangeEvent<HTMLInputElement>) => {
     setUrl(event.target.value);
   };
   const handleUrlSubmit = () => {

@@ -12,13 +12,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
 import fs from 'fs';
-import {
-  app,
-  BrowserWindow,
-  ipcMain,
-  Notification,
-  ipcRenderer,
-} from 'electron';
+import { app, BrowserWindow, ipcMain, Notification } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import MenuBuilder from './menu';
@@ -165,14 +159,16 @@ ipcMain.on('app-notification', (event, args) => {
 });
 
 ipcMain.handle('loadData', async (event, filename) => {
+  log.info(`Load Data Event ${event.frameId}`);
   const userDataPath = app.getPath('userData');
   const filePath = path.join(userDataPath, `${filename}.json`);
   fs.writeFileSync(filePath, '', { flag: 'a' });
-  const data = fs.readFileSync(filePath);
+  const data: string = fs.readFileSync(filePath, { encoding: 'utf8' });
   return data.length > 0 ? JSON.parse(data) : null;
 });
 
 ipcMain.handle('saveData', async (event, filename, data) => {
+  log.info(`Save Data event ${event.frameId}`);
   const userDataPath = app.getPath('userData');
   const filePath = path.join(userDataPath, `${filename}.json`);
   fs.writeFileSync(filePath, JSON.stringify(data, null, 4));

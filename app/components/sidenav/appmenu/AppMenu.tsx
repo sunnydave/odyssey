@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styles from './AppMenu.css';
 import { deleteApp } from '../../../features/apps/appGroupSlice';
 
-export default function AppMenu(props) {
+export default function AppMenu(props: any) {
   const dispatch = useDispatch();
   const { appId } = props;
   return (

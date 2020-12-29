@@ -18,7 +18,7 @@ export default function AppTabs() {
   const currentActiveApp = useSelector(activeApp);
   return (
     <div className={styles.container}>
-      {apps.map((app) => (
+      {apps.map((app: any) => (
         <Tabs
           key={app.id}
           className={
@@ -30,7 +30,7 @@ export default function AppTabs() {
           }}
         >
           <TabList className={styles.tabList}>
-            {app.openTabs.map((tab) => (
+            {app.openTabs.map((tab: any) => (
               <Tab
                 key={tab.id}
                 className={styles.tab}
@@ -73,7 +73,7 @@ export default function AppTabs() {
               <i className="fa fa-plus-circle fa-2x" />
             </button>
           </TabList>
-          {app.openTabs.map((tab) => (
+          {app.openTabs.map((tab: any) => (
             <TabPanel
               forceRender
               key={tab.id}

@@ -21,6 +21,7 @@ export default function Home(): JSX.Element {
   const [appsLoaded, setAppsLoaded] = useState(false);
   useEffect(() => {
     ipcRenderer.on('notification-click', (event, args) => {
+      log.info(`Notification Click event : ${event}`);
       dispatch(setActiveApp({ activeAppId: args.appId }));
     });
     FileUtils.loadData('userApps')

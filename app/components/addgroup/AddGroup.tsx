@@ -19,13 +19,13 @@ export default function AddGroup() {
         log.error(error);
       });
   }, []);
-  const addApp = (app) => {
+  const addApp = (app: any) => {
     dispatch(addAppGroup(app));
   };
   return (
     <div className="grid-container">
       {appList && appList.length > 0 ? (
-        appList.map((app, index) => (
+        appList.map((app: any, index) => (
           <div
             role="button"
             className="grid-item"

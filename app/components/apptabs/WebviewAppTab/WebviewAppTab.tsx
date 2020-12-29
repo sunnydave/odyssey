@@ -1,24 +1,27 @@
-import React, { useRef, useEffect } from 'react';
+import React, { createRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { ipcRenderer } from 'electron';
 import styles from './WebviewAppTab.css';
 import { updateTab } from '../../../features/apps/appGroupSlice';
 
-export default function WebviewAppTab(props) {
+export default function WebviewAppTab(props: any) {
   const dispatch = useDispatch();
   const { appId, tabId, tabUrl, appSeperateSession } = props;
-  const webview = useRef();
+  const webview = createRef<HTMLWebViewElement>();
   useEffect(() => {
     if (webview) {
-      webview.current.addEventListener('page-favicon-updated', (source) => {
-        const { favicons } = source;
-        const favicon = favicons[0];
-        dispatch(updateTab({ appId, tabId, tabIcon: favicon }));
-      });
-      webview.current.addEventListener('page-title-updated', () => {
-        let title = webview.current.getTitle();
-        if (title.length > 15) {
+      webview.current!.addEventListener(
+        'page-favicon-updated',
+        (source: any) => {
+          const { favicons } = source;
+          const favicon = favicons[0];
+          dispatch(updateTab({ appId, tabId, tabIcon: favicon }));
+        }
+      );
+      webview.current!.addEventListener('page-title-updated', (event: any) => {
+        let { title } = event;
+        if (title && title.length > 15) {
           title = title.substr(0, 15);
         }
         dispatch(updateTab({ appId, tabId, tabTitle: title }));
@@ -26,7 +29,7 @@ export default function WebviewAppTab(props) {
       // webview.current.addEventListener('dom-ready', () => {
       //   webview.current.openDevTools();
       // });
-      webview.current.addEventListener('ipc-message', (event) => {
+      webview.current!.addEventListener('ipc-message', (event: any) => {
         ipcRenderer.send('app-notification', {
           title: event.args[0].title,
           body: event.args[0].body,
