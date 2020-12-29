@@ -70,9 +70,9 @@ MIT © [Electron React Boilerplate](https://github.com/electron-react-boilerplat
 [github-actions-url]: https://github.com/sunnydave/odyssey/actions
 [github-tag-image]: https://img.shields.io/github/tag/electron-react-boilerplate/electron-react-boilerplate.svg?label=version
 [github-tag-url]: https://github.com/sunnydave/odyssey/releases/latest
-[david-image]: https://img.shields.io/david/electron-react-boilerplate/electron-react-boilerplate.svg
-[david-url]: https://david-dm.org/electron-react-boilerplate/electron-react-boilerplate
-[david-dev-image]: https://img.shields.io/david/dev/electron-react-boilerplate/electron-react-boilerplate.svg?label=devDependencies
-[david-dev-url]: https://david-dm.org/electron-react-boilerplate/electron-react-boilerplate?type=dev
+[david-image]: https://img.shields.io/david/sunnydave/odyssey.svg
+[david-url]: https://david-dm.org/sunnydave/odyssey
+[david-dev-image]: https://img.shields.io/david/dev/sunnydave/odyssey.svg?label=devDependencies
+[david-dev-url]: https://david-dm.org/sunnydave/odyssey?type=dev
 [good-first-issue-image]: https://img.shields.io/github/issues/electron-react-boilerplate/electron-react-boilerplate/good%20first%20issue.svg?label=good%20first%20issues
 [good-first-issue-url]: https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues?q=is%3Aopen+is%3Aissue+label%3A"good+first+issue"
