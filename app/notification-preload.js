@@ -9,4 +9,9 @@ const AppNotification = function (title, ops) {
   });
 };
 
+const requestPermission = function (callback) {
+  callback(true);
+};
+
 window.Notification = AppNotification;
+window.Notification.requestPermission = requestPermission;

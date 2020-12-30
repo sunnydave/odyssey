@@ -1,7 +1,7 @@
 {
   "name": "nan-odyssey",
   "productName": "NaN Odyssey",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A Simple application to segregate your webapps into groups for easy navigation.",
   "main": "./main.prod.js",
   "author": {
