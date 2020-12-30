@@ -35,6 +35,7 @@ export default function SideNav() {
                 onClick={() => dispatch(setActiveApp({ activeAppId: app.id }))}
               >
                 <Popup
+                  key={app.id}
                   trigger={
                     <img
                       src={app.icon}

@@ -11,6 +11,10 @@ export default function WebviewAppTab(props: any) {
   const webview = createRef<HTMLWebViewElement>();
   useEffect(() => {
     if (webview) {
+      if (webview.current) {
+        webview.current.setAttribute('allowpopups', '');
+        webview.current.setAttribute('plugins', '');
+      }
       webview.current!.addEventListener(
         'page-favicon-updated',
         (source: any) => {
@@ -25,9 +29,6 @@ export default function WebviewAppTab(props: any) {
           title = title.substr(0, 15);
         }
         dispatch(updateTab({ appId, tabId, tabTitle: title }));
-      });
-      webview.current.addEventListener('dom-ready', () => {
-        webview.current.openDevTools();
       });
       webview.current!.addEventListener('ipc-message', (event: any) => {
         ipcRenderer.send('app-notification', {
@@ -47,9 +48,7 @@ export default function WebviewAppTab(props: any) {
       src={tabUrl}
       className={styles.webview}
       id={tabId}
-      allowpopups
-      plugins
-      webpreferences="allowRunningInsecureContent"
+      webpreferences="allowRunningInsecureContent, nativeWindowOpen=yes"
       preload="./notification-preload.js"
       partition={appSeperateSession ? `persist:${appId}` : `persist:odyssey`}
       useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 11_0_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.67 Safari/537.36"

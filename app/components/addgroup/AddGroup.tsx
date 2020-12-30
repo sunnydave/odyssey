@@ -10,7 +10,7 @@ export default function AddGroup() {
   const [appList, setAppList] = useState([]);
   useEffect(() => {
     axios
-      .get('https://cdn.nerdyandnoisy.com/NaNSpace/apps_dev_v4.json')
+      .get('https://cdn.nerdyandnoisy.com/NaNSpace/apps_v2.json')
       .then((response) => {
         setAppList(response.data);
         return appList;
