@@ -68,7 +68,7 @@ MIT © [Electron React Boilerplate](https://github.com/electron-react-boilerplat
 
 [github-actions-status]: https://github.com/sunnydave/odyssey/workflows/Test/badge.svg
 [github-actions-url]: https://github.com/sunnydave/odyssey/actions
-[github-tag-image]: https://img.shields.io/github/tag/electron-react-boilerplate/electron-react-boilerplate.svg?label=version
+[github-tag-image]: https://img.shields.io/github/tag/sunnydave/odyssey.svg?label=version
 [github-tag-url]: https://github.com/sunnydave/odyssey/releases/latest
 [david-image]: https://img.shields.io/david/sunnydave/odyssey.svg
 [david-url]: https://david-dm.org/sunnydave/odyssey

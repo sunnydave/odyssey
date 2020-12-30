@@ -26,9 +26,9 @@ export default function WebviewAppTab(props: any) {
         }
         dispatch(updateTab({ appId, tabId, tabTitle: title }));
       });
-      // webview.current.addEventListener('dom-ready', () => {
-      //   webview.current.openDevTools();
-      // });
+      webview.current.addEventListener('dom-ready', () => {
+        webview.current.openDevTools();
+      });
       webview.current!.addEventListener('ipc-message', (event: any) => {
         ipcRenderer.send('app-notification', {
           title: event.args[0].title,
@@ -50,7 +50,7 @@ export default function WebviewAppTab(props: any) {
       allowpopups
       plugins
       webpreferences="allowRunningInsecureContent"
-      preload={`file://${__dirname}/notification-preload.js`}
+      preload="./notification-preload.js"
       partition={appSeperateSession ? `persist:${appId}` : `persist:odyssey`}
       useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 11_0_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.67 Safari/537.36"
     />
