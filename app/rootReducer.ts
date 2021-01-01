@@ -5,11 +5,14 @@ import { History } from 'history';
 import counterReducer from './features/counter/counterSlice';
 // eslint-disable-next-line import/no-cycle
 import appGroupReducer from './features/apps/appGroupSlice';
+// eslint-disable-next-line import/no-cycle
+import downloadReducer from './features/downloads/downloadSlice';
 
 export default function createRootReducer(history: History) {
   return combineReducers({
     router: connectRouter(history),
     counter: counterReducer,
     appGroups: appGroupReducer,
+    downloads: downloadReducer,
   });
 }

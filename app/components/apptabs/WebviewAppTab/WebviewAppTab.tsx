@@ -1,9 +1,17 @@
 import React, { createRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ipcRenderer } from 'electron';
+import { DownloadItem, ipcRenderer } from 'electron';
+import { v4 as uuidv4 } from 'uuid';
 import styles from './WebviewAppTab.css';
 import { updateTab } from '../../../features/apps/appGroupSlice';
+import {
+  newActiveDownload,
+  downloadProgress,
+  downloadState,
+  completeDownload,
+  pauseDownload,
+} from '../../../features/downloads/downloadSlice';
 
 export default function WebviewAppTab(props: any) {
   const dispatch = useDispatch();
@@ -15,6 +23,73 @@ export default function WebviewAppTab(props: any) {
         webview.current.setAttribute('allowpopups', '');
         webview.current.setAttribute('plugins', '');
       }
+      webview
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .current!.getWebContents()
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        .session.on('will-download', (event: any, item: DownloadItem) => {
+          console.log('Download Started');
+          console.log(item);
+          const downloadItem: any = {};
+          downloadItem.id = uuidv4();
+          downloadItem.fileName = item.getFilename();
+          downloadItem.totalBytes = item.getTotalBytes();
+          downloadItem.receivedBytes = item.getTotalBytes();
+          downloadItem.state = item.getState();
+          downloadItem.isPaused = item.isPaused();
+          dispatch(newActiveDownload({ newDownload: downloadItem }));
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          // eslint-disable-next-line no-shadow
+          item.on('updated', (event: any, state: string) => {
+            if (state === 'interrupted') {
+              dispatch(
+                downloadState({
+                  downloadId: downloadItem.id,
+                  downloadState: state,
+                })
+              );
+            } else if (state === 'progressing') {
+              if (item.isPaused()) {
+                dispatch(
+                  pauseDownload({
+                    downloadId: downloadItem.id,
+                    isPaused: item.isPaused(),
+                  })
+                );
+              } else {
+                dispatch(
+                  downloadProgress({
+                    downloadId: downloadItem.id,
+                    receivedBytes: item.getReceivedBytes(),
+                  })
+                );
+              }
+            }
+          });
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-ignore
+          // eslint-disable-next-line no-shadow
+          item.once('done', (event: any, state: string) => {
+            if (state === 'completed') {
+              dispatch(
+                completeDownload({
+                  downloadId: downloadItem.id,
+                  downloadState: state,
+                })
+              );
+            } else {
+              dispatch(
+                completeDownload({
+                  downloadId: downloadItem.id,
+                  downloadState: state,
+                })
+              );
+            }
+          });
+        });
       webview.current!.addEventListener(
         'page-favicon-updated',
         (source: any) => {

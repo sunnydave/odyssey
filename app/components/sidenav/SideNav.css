@@ -27,6 +27,18 @@
   color: yellowgreen;
 }
 
+.downloadButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 15px;
+}
+
+.downloadButton i {
+  color: #385c78;
+}
+
 .modal {
   font-size: 12px;
   background: #232c39;
@@ -99,4 +111,14 @@
 }
 .appMenuItem:hover {
   background: #2a476e;
+}
+
+.downloadButtonBadge {
+  color: black !important;
+  background-color: yellowgreen !important;
+  top: -25px !important;
+  left: 20px;
+  bottom: 5px;
+  right: 0;
+  padding: 4px !important;
 }

@@ -1,22 +1,32 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import Popup from 'reactjs-popup';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import NotificationBadge from 'react-notification-badge';
 import styles from './SideNav.css';
 import {
   appGroups,
   activeApp,
   setActiveApp,
 } from '../../features/apps/appGroupSlice';
+import { activeDownloads } from '../../features/downloads/downloadSlice';
 import AddGroupPopup from '../addgroup/AddGroup';
 import AppMenu from './appmenu/AppMenu';
+import DownloadPopup from '../downloadpopup/DownloadPopup';
 
 export default function SideNav() {
   const dispatch = useDispatch();
   const apps = useSelector(appGroups);
   const currentActiveApp = useSelector(activeApp);
+  const currentActiveDownloads = useSelector(activeDownloads);
   const [openAddGroupPopup, setOpenAddGroupPopup] = useState(false);
+  const [openDownloadPopup, setOpenDownloadPopup] = useState(false);
   const toggleOpenAddGroupPopup = () => {
     setOpenAddGroupPopup(!openAddGroupPopup);
+  };
+  const toggleDownloadPopup = () => {
+    setOpenDownloadPopup(!openDownloadPopup);
   };
   return (
     <div>
@@ -58,6 +68,19 @@ export default function SideNav() {
         <footer className={styles.footer}>
           <button
             type="button"
+            className={styles.downloadButton}
+            onClick={() => toggleDownloadPopup()}
+          >
+            <i className="fa fa-download fa-2x" />
+            <NotificationBadge
+              count={currentActiveDownloads.length}
+              effect={[null, null, { top: '-5px' }, { top: '0px' }]}
+              className={styles.downloadButtonBadge}
+            />
+          </button>
+          <br />
+          <button
+            type="button"
             className={styles.button}
             onClick={() => toggleOpenAddGroupPopup()}
           >
@@ -80,6 +103,10 @@ export default function SideNav() {
           </div>
         </div>
       </Popup>
+      <DownloadPopup
+        show={openDownloadPopup}
+        toggleDownloadPopup={toggleDownloadPopup}
+      />
     </div>
   );
 }

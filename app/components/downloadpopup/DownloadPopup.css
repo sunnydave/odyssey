@@ -1,0 +1,52 @@
+.modal {
+  font-size: 12px;
+  background: #232c39;
+  padding: 5px;
+  border-radius: 4px;
+}
+.modal > .header {
+  width: 100%;
+  font-size: 18px;
+  text-align: center;
+  padding: 5px;
+}
+.modal > .content {
+  width: 100%;
+  padding: 10px 5px;
+}
+.modal > .actions {
+  width: 100%;
+  padding: 10px 5px;
+  margin: auto;
+  text-align: center;
+}
+.modal > .close {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+  padding: 2px 5px;
+  line-height: 20px;
+  right: -10px;
+  top: -10px;
+  font-size: 24px;
+  background: #fff;
+  border-radius: 18px;
+  border: 1px solid #cfcece;
+}
+
+.downloadList {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+
+.downloadItem {
+  cursor: pointer;
+  padding: 10px;
+  background: #2a476e;
+  margin-bottom: 10px;
+  border-radius: 10px;
+
+  /* border-bottom: 1px solid rgb(187, 187, 187); */
+}
