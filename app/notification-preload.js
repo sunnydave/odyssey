@@ -1,6 +1,5 @@
-const { ipcRenderer, Notification } = require('electron');
+const { ipcRenderer } = require('electron');
 
-console.log('Inside preload script');
 const AppNotification = function (title, ops) {
   ipcRenderer.sendToHost('app-notification', {
     title,
@@ -10,6 +9,7 @@ const AppNotification = function (title, ops) {
 };
 
 const requestPermission = function (callback) {
+  window.Notification.permission = 'granted';
   callback(true);
 };
 

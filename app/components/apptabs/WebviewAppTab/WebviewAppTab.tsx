@@ -106,16 +106,20 @@ export default function WebviewAppTab(props: any) {
         dispatch(updateTab({ appId, tabId, tabTitle: title }));
       });
       webview.current!.addEventListener('ipc-message', (event: any) => {
-        ipcRenderer.send('app-notification', {
-          title: event.args[0].title,
-          body: event.args[0].body,
-          icon: event.args[0].icon,
-          appId,
-          tabId,
-        });
+        if (event.channel === 'app-notification'){
+          ipcRenderer.send('app-notification', {
+            title: event.args[0].title,
+            body: event.args[0].body,
+            icon: event.args[0].icon,
+            appId,
+            tabId,
+          });
+        } else if (event.channel === 'console-log') {
+          console.log(event.args);
+        }
       });
     }
-  }, [appId]);
+  }, [appId, tabId]);
 
   return (
     <webview
