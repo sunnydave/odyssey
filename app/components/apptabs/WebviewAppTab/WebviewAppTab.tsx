@@ -106,7 +106,7 @@ export default function WebviewAppTab(props: any) {
         dispatch(updateTab({ appId, tabId, tabTitle: title }));
       });
       webview.current!.addEventListener('ipc-message', (event: any) => {
-        if (event.channel === 'app-notification'){
+        if (event.channel === 'app-notification') {
           ipcRenderer.send('app-notification', {
             title: event.args[0].title,
             body: event.args[0].body,
