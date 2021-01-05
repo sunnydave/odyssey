@@ -38,6 +38,8 @@ jobs:
           Xvfb :99 &
           disown -ar
           echo "::set-env name=DISPLAY:::99"
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: 'true'
       # TODO: Testcafe e2e are broken because of:
       # https://github.com/DevExpress/testcafe/issues/4512
       # Tests are currently broken on linux and macos
