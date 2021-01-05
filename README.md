@@ -1,7 +1,3 @@
-<img src="internals/img/erb-banner.png" width="100%" />
-
-<br>
-
 <p>
   A simple browser for users to group webapps using <a href="https://electron.atom.io/">Electron</a>, <a 
 href="https://facebook.
@@ -28,6 +24,7 @@ io/react/">React</a>,
 <div align="center">
 
 [![Build Status][github-actions-status]][github-actions-url]
+[![Publish Status][github-publish-image]][github-publish-image]
 [![Dependency Status][david-image]][david-url]
 [![DevDependency Status][david-dev-image]][david-dev-url]
 [![Github Tag][github-tag-image]][github-tag-url]
@@ -36,12 +33,13 @@ io/react/">React</a>,
 
 ## Install
 
-- **If you have installation or compilation issues with this project, please see [our debugging guide](https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues/400)**
+- **If you have installation or compilation issues with this project, please see [electron-react-boilerplate debugging
+  guide](https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues/400)**
 
 First, clone the repo via git and install dependencies:
 
 ```bash
-git clone --depth 1 --single-branch https://github.com/electron-react-boilerplate/electron-react-boilerplate.git your-project-name
+git clone --depth 1 --single-branch https://github.com/sunnydave/odyssey your-project-name
 cd your-project-name
 yarn
 ```
@@ -76,3 +74,4 @@ MIT © [Electron React Boilerplate](https://github.com/electron-react-boilerplat
 [david-dev-url]: https://david-dm.org/sunnydave/odyssey?type=dev
 [good-first-issue-image]: https://img.shields.io/github/issues/electron-react-boilerplate/electron-react-boilerplate/good%20first%20issue.svg?label=good%20first%20issues
 [good-first-issue-url]: https://github.com/electron-react-boilerplate/electron-react-boilerplate/issues?q=is%3Aopen+is%3Aissue+label%3A"good+first+issue"
+[github-publish-image]: https://github.com/sunnydave/odyssey/workflows/Publish/badge.svg?branch=master
