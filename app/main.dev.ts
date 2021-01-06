@@ -159,16 +159,11 @@ ipcMain.on('app-notification', (event, args) => {
       mainWindow?.restore();
     }
     mainWindow?.focus();
-    event.sender.send('notification-click', {
-      appId: args.appId,
-      tabId: args.tabId,
-    });
     event.sender.send(`notification-onclick:${args.notificationId}`, {});
   });
 });
 
-ipcMain.handle('loadData', async (event, filename) => {
-  log.info(`Load Data Event ${event.frameId}`);
+ipcMain.handle('loadData', async (_event, filename) => {
   const userDataPath = app.getPath('userData');
   const filePath = path.join(userDataPath, `${filename}.json`);
   fs.writeFileSync(filePath, '', { flag: 'a' });
@@ -176,8 +171,7 @@ ipcMain.handle('loadData', async (event, filename) => {
   return data.length > 0 ? JSON.parse(data) : null;
 });
 
-ipcMain.handle('saveData', async (event, filename, data) => {
-  log.info(`Save Data event ${event.frameId}`);
+ipcMain.handle('saveData', async (_event, filename, data) => {
   const userDataPath = app.getPath('userData');
   const filePath = path.join(userDataPath, `${filename}.json`);
   fs.writeFileSync(filePath, JSON.stringify(data, null, 4));

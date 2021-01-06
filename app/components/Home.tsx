@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { ipcRenderer } from 'electron';
 import Loader from 'react-loader-spinner';
 import log from 'electron-log';
 import SideNav from './sidenav/SideNav';
@@ -9,7 +8,6 @@ import styles from './Home.css';
 import {
   activeApp,
   appGroups,
-  setActiveApp,
   setInitialState,
 } from '../features/apps/appGroupSlice';
 import FileUtils from '../utils/FileUtils';
@@ -20,10 +18,6 @@ export default function Home(): JSX.Element {
   const currentActiveApp = useSelector(activeApp);
   const [appsLoaded, setAppsLoaded] = useState(false);
   useEffect(() => {
-    ipcRenderer.on('notification-click', (event, args) => {
-      log.info(`Notification Click event : ${event}`);
-      dispatch(setActiveApp({ activeAppId: args.appId }));
-    });
     FileUtils.loadData('userApps')
       .then((data) => {
         setAppsLoaded(true);

@@ -10,7 +10,7 @@ class Notification {
     this.title = title;
     this.options = options;
     this.notificationId = uuidv4();
-    ipcRenderer.sendToHost('app-notification', {
+    ipcRenderer.send('app-notification', {
       title: this.title,
       body: this.options.body,
       icon: this.options.icon,
@@ -21,11 +21,11 @@ class Notification {
       if (typeof this.onclick === 'function') {
         this.onclick();
       }
+      ipcRenderer.sendToHost('notification-click');
     });
   }
 
   static requestPermission(cb = null) {
-    console.log('Request permission');
     if (!cb) {
       return new Promise((resolve) => {
         resolve(Notification.permission);

@@ -1,10 +1,10 @@
 import React, { createRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
-import { DownloadItem, ipcRenderer } from 'electron';
+import { DownloadItem } from 'electron';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './WebviewAppTab.css';
-import { updateTab } from '../../../features/apps/appGroupSlice';
+import { setActiveApp, updateTab } from '../../../features/apps/appGroupSlice';
 import {
   newActiveDownload,
   downloadProgress,
@@ -106,16 +106,10 @@ export default function WebviewAppTab(props: any) {
         dispatch(updateTab({ appId, tabId, tabTitle: title }));
       });
       webview.current!.addEventListener('ipc-message', (event: any) => {
-        if (event.channel === 'app-notification') {
-          ipcRenderer.send('app-notification', {
-            title: event.args[0].title,
-            body: event.args[0].body,
-            icon: event.args[0].icon,
-            appId,
-            tabId,
-          });
-        } else if (event.channel === 'console-log') {
+        if (event.channel === 'console-log') {
           console.log(event.args);
+        } else if (event.channel === 'notification-click') {
+          dispatch(setActiveApp({ activeAppId: appId }));
         }
       });
     }
