@@ -34,6 +34,15 @@ const appGroupSlice = createSlice({
       const { activeAppId } = payloadAction.payload;
       state.activeApp = activeAppId;
     },
+    changeAppNotificationEnabled: (state, payloadAction) => {
+      const { appId, notificationEnabled } = payloadAction.payload;
+      const selectedApp: any = state.apps.find(
+        (stateApp: any) => stateApp.id === appId
+      );
+      if (selectedApp) {
+        selectedApp.notificationEnabled = notificationEnabled;
+      }
+    },
     deleteApp: (state, payloadAction) => {
       const { appId } = payloadAction.payload;
       const selectedAppIndex = state.apps.findIndex(
@@ -118,6 +127,7 @@ export const {
   setInitialState,
   addAppGroup,
   setActiveApp,
+  changeAppNotificationEnabled,
   newTab,
   closeTab,
   updateTab,

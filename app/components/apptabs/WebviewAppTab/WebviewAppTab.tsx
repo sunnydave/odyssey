@@ -30,8 +30,6 @@ export default function WebviewAppTab(props: any) {
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         .session.on('will-download', (event: any, item: DownloadItem) => {
-          console.log('Download Started');
-          console.log(item);
           const downloadItem: any = {};
           downloadItem.id = uuidv4();
           downloadItem.fileName = item.getFilename();

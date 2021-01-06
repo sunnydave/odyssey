@@ -42,6 +42,7 @@
   margin-bottom: 2px;
   height: 25px;
   color: lightgrey;
+  -webkit-app-region: no-drag;
 }
 
 .tabSelected {
@@ -54,6 +55,7 @@
 .tabList {
   margin: 10px 0 0 0;
   padding: 0;
+  -webkit-app-region: drag;
 }
 
 .tabIcon {

@@ -1,8 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const { ipcRenderer } = require('electron');
 
-console.log('Notification preload script');
-
 class Notification {
   static permission = 'granted';
 

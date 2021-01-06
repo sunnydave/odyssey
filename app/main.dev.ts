@@ -12,9 +12,10 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
 import fs from 'fs';
-import { app, BrowserWindow, ipcMain, Notification } from 'electron';
+import { app, BrowserWindow, ipcMain, Notification, shell } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import contextMenu from 'electron-context-menu';
 import MenuBuilder from './menu';
 
 export default class AppUpdater {
@@ -26,6 +27,7 @@ export default class AppUpdater {
 }
 
 let mainWindow: BrowserWindow | null = null;
+let notificationsEnabled = true;
 
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
@@ -76,6 +78,7 @@ const createWindow = async () => {
     height: 728,
     icon: getAssetPath('icon.png'),
     titleBarStyle: process.platform === 'darwin' ? 'hidden' : 'default',
+    frame: false,
     webPreferences:
       (process.env.NODE_ENV === 'development' ||
         process.env.E2E_BUILD === 'true') &&
@@ -146,21 +149,62 @@ app.on('activate', () => {
   if (mainWindow === null) createWindow();
 });
 
+app.on('web-contents-created', (_event, contents) => {
+  if (contents.getType() === 'webview') {
+    // eslint-disable-next-line no-shadow
+    contents.on('new-window', (_event, url) => {
+      _event.preventDefault();
+      shell.openExternal(url);
+    });
+    contextMenu({
+      window: contents,
+      prepend: (_defaultActions, _params, _browserWindow) => [
+        {
+          label: 'Forward',
+          visible: contents.canGoForward(),
+          click: () => {
+            contents.goForward();
+          },
+        },
+        {
+          label: 'Back',
+          visible: contents.canGoBack(),
+          click: () => {
+            contents.goBack();
+          },
+        },
+        {
+          label: 'Reload',
+          click: () => {
+            contents.reload();
+          },
+        },
+      ],
+    });
+  }
+});
+
 ipcMain.on('app-notification', (event, args) => {
-  const notification = new Notification({
-    title: args.title,
-    body: args.body,
-    icon: args.icon,
-  });
-  notification.show();
-  notification.on('click', () => {
-    mainWindow!.show();
-    if (mainWindow!.isMinimized()) {
-      mainWindow?.restore();
-    }
-    mainWindow?.focus();
-    event.sender.send(`notification-onclick:${args.notificationId}`, {});
-  });
+  if (notificationsEnabled) {
+    const notification = new Notification({
+      title: args.title,
+      body: args.body,
+      icon: args.icon,
+    });
+    notification.show();
+    notification.on('click', () => {
+      mainWindow!.show();
+      if (mainWindow!.isMinimized()) {
+        mainWindow?.restore();
+      }
+      mainWindow?.focus();
+      event.sender.send(`notification-onclick:${args.notificationId}`, {});
+    });
+  }
+});
+
+ipcMain.on('toggleNotification', (_event) => {
+  notificationsEnabled = !notificationsEnabled;
 });
 
 ipcMain.handle('loadData', async (_event, filename) => {
