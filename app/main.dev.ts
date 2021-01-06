@@ -69,10 +69,13 @@ const createWindow = async () => {
   };
 
   mainWindow = new BrowserWindow({
+    x: 0,
+    y: 0,
     show: false,
     width: 1024,
     height: 728,
     icon: getAssetPath('icon.png'),
+    titleBarStyle: process.platform === 'darwin' ? 'hidden' : 'default',
     webPreferences:
       (process.env.NODE_ENV === 'development' ||
         process.env.E2E_BUILD === 'true') &&
@@ -151,10 +154,16 @@ ipcMain.on('app-notification', (event, args) => {
   });
   notification.show();
   notification.on('click', () => {
+    mainWindow!.show();
+    if (mainWindow!.isMinimized()) {
+      mainWindow?.restore();
+    }
+    mainWindow?.focus();
     event.sender.send('notification-click', {
       appId: args.appId,
       tabId: args.tabId,
     });
+    event.sender.send(`notification-onclick:${args.notificationId}`, {});
   });
 });
 
