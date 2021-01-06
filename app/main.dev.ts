@@ -12,7 +12,7 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import path from 'path';
 import fs from 'fs';
-import { app, BrowserWindow, ipcMain, Notification, shell } from 'electron';
+import { app, BrowserWindow, ipcMain, Notification } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 import contextMenu from 'electron-context-menu';
@@ -151,11 +151,6 @@ app.on('activate', () => {
 
 app.on('web-contents-created', (_event, contents) => {
   if (contents.getType() === 'webview') {
-    // eslint-disable-next-line no-shadow
-    contents.on('new-window', (_event, url) => {
-      _event.preventDefault();
-      shell.openExternal(url);
-    });
     contextMenu({
       window: contents,
       prepend: (_defaultActions, _params, _browserWindow) => [
