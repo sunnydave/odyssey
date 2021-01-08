@@ -35,8 +35,13 @@ export default function DownloadPopup(props: any) {
                 <div className={styles.downloadList}>
                   {currentActiveDownloads.map((downloadItem: any) => (
                     <div key={downloadItem.id} className={styles.downloadList}>
-                      <span>{downloadItem.fileName}</span>
-                      <span>{downloadItem.state}</span>
+                      <div>{downloadItem.fileName}</div>
+                      <div className={styles.downloadItemUrl}>
+                        {downloadItem.url}
+                      </div>
+                      <div className={styles.downloadItemStatus}>
+                        {downloadItem.state}
+                      </div>
                       <progress
                         value={downloadItem.receivedBytes}
                         max={downloadItem.totalBytes}
@@ -53,7 +58,13 @@ export default function DownloadPopup(props: any) {
                 <div className={styles.downloadList}>
                   {currentCompletedDownloads.map((downloadItem: any) => (
                     <div key={downloadItem.id} className={styles.downloadItem}>
-                      <span>{downloadItem.fileName}</span>
+                      <div>{downloadItem.fileName}</div>
+                      <div className={styles.downloadItemUrl}>
+                        {downloadItem.url}
+                      </div>
+                      <div className={styles.downloadItemStatus}>
+                        {downloadItem.state}
+                      </div>
                     </div>
                   ))}
                 </div>

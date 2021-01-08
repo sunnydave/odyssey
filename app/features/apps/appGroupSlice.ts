@@ -33,6 +33,12 @@ const appGroupSlice = createSlice({
     setActiveApp: (state, payloadAction) => {
       const { activeAppId } = payloadAction.payload;
       state.activeApp = activeAppId;
+      const selectedApp: any = state.apps.find(
+        (stateApp: any) => stateApp.id === activeAppId
+      );
+      if (selectedApp) {
+        selectedApp.notificationCount = 0;
+      }
     },
     changeAppNotificationEnabled: (state, payloadAction) => {
       const { appId, notificationEnabled } = payloadAction.payload;
@@ -41,6 +47,27 @@ const appGroupSlice = createSlice({
       );
       if (selectedApp) {
         selectedApp.notificationEnabled = notificationEnabled;
+      }
+    },
+    updateAppNotification: (state, payloadAction) => {
+      const { appId, tabId } = payloadAction.payload;
+      const selectedApp: any = state.apps.find(
+        (stateApp: any) => stateApp.id === appId
+      );
+      if (selectedApp) {
+        if (!selectedApp.notificationCount) {
+          selectedApp.notificationCount = 0;
+        }
+        selectedApp.notificationCount += 1;
+        const selectedTab = selectedApp.openTabs.find(
+          (tab: any) => tab.id === tabId
+        );
+        if (selectedTab) {
+          if (selectedTab.notificationCount) {
+            selectedTab.notificationCount = 0;
+          }
+          selectedTab.notificationCount += 1;
+        }
       }
     },
     deleteApp: (state, payloadAction) => {
@@ -133,6 +160,7 @@ export const {
   updateTab,
   deleteApp,
   changeTabSelection,
+  updateAppNotification,
 } = appGroupSlice.actions;
 
 export default appGroupSlice.reducer;

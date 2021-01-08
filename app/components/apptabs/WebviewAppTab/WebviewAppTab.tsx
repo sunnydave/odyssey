@@ -4,7 +4,11 @@ import PropTypes from 'prop-types';
 import { DownloadItem } from 'electron';
 import { v4 as uuidv4 } from 'uuid';
 import styles from './WebviewAppTab.css';
-import { setActiveApp, updateTab } from '../../../features/apps/appGroupSlice';
+import {
+  setActiveApp,
+  updateTab,
+  updateAppNotification,
+} from '../../../features/apps/appGroupSlice';
 import {
   newActiveDownload,
   downloadProgress,
@@ -37,6 +41,8 @@ export default function WebviewAppTab(props: any) {
           downloadItem.receivedBytes = item.getTotalBytes();
           downloadItem.state = item.getState();
           downloadItem.isPaused = item.isPaused();
+          downloadItem.savePath = item.getSavePath();
+          downloadItem.url = item.getURL();
           dispatch(newActiveDownload({ newDownload: downloadItem }));
           // eslint-disable-next-line @typescript-eslint/ban-ts-comment
           // @ts-ignore
@@ -88,6 +94,7 @@ export default function WebviewAppTab(props: any) {
             }
           });
         });
+
       webview.current!.addEventListener(
         'page-favicon-updated',
         (source: any) => {
@@ -108,10 +115,12 @@ export default function WebviewAppTab(props: any) {
           console.log(event.args);
         } else if (event.channel === 'notification-click') {
           dispatch(setActiveApp({ activeAppId: appId }));
+        } else if (event.channel === 'notification-received') {
+          dispatch(updateAppNotification({ appId, tabId }));
         }
       });
     }
-  }, [appId, tabId]);
+  }, []);
 
   return (
     <webview

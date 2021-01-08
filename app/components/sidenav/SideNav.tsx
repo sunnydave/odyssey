@@ -26,7 +26,6 @@ export default function SideNav() {
   const [openDownloadPopup, setOpenDownloadPopup] = useState(false);
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   useEffect(() => {
-    console.log('Sidenav updated');
     ReactTooltip.rebuild();
   });
   const toggleOpenAddGroupPopup = () => {
@@ -69,10 +68,14 @@ export default function SideNav() {
                   on="right-click"
                   arrow={false}
                   contentStyle={{ padding: '0px', border: 'none' }}
-                  closeOnDocumentClick
                 >
                   <AppMenu appId={app.id} />
                 </Popup>
+                <NotificationBadge
+                  count={app.notificationCount}
+                  effect={[null, null, { top: '-5px' }, { top: '0px' }]}
+                  className={styles.appNotificationBadge}
+                />
               </button>
             </>
           ))}

@@ -8,8 +8,12 @@ const downloadSlice = createSlice({
   reducers: {
     newActiveDownload: (state, payloadAction) => {
       const { newDownload } = payloadAction.payload;
-      console.log(`New Download ${newDownload}`);
-      state.activeDownloads.push(newDownload);
+      const download = state.activeDownloads.find(
+        (stateDownload: any) => stateDownload.url === newDownload.url
+      );
+      if (!download) {
+        state.activeDownloads.push(newDownload);
+      }
     },
     downloadProgress: (state, payloadAction) => {
       const { downloadId, receivedBytes } = payloadAction.payload;

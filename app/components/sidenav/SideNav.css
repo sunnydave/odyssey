@@ -123,8 +123,16 @@
   color: black !important;
   background-color: yellowgreen !important;
   top: -25px !important;
-  left: 20px;
   bottom: 5px;
-  right: 0;
+  right: 2px !important;
+  padding: 4px !important;
+}
+
+.appNotificationBadge {
+  color: black !important;
+  background-color: yellowgreen !important;
+  top: -10px !important;
+  left: 40px;
+  right: 5px !important;
   padding: 4px !important;
 }

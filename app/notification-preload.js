@@ -24,6 +24,8 @@ class Notification {
       notificationId: this.notificationId,
     });
 
+    ipcRenderer.sendToHost('notification-received', {});
+
     ipcRenderer.once(`notification-onclick:${this.notificationId}`, () => {
       if (typeof this.onclick === 'function') {
         this.onclick();
