@@ -63,3 +63,12 @@
   margin-right: 5px;
   margin-bottom: -5px;
 }
+
+.tabNotificationBadge {
+  color: black !important;
+  background-color: yellowgreen !important;
+  top: -10px !important;
+  left: 40px;
+  right: 5px !important;
+  padding: 4px !important;
+}

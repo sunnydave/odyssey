@@ -131,7 +131,7 @@ export default function WebviewAppTab(props: any) {
       webpreferences="allowRunningInsecureContent, nativeWindowOpen=yes"
       preload="./notification-preload.js"
       partition={appSeperateSession ? `persist:${appId}` : `persist:odyssey`}
-      useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 11_0_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.67 Safari/537.36"
+      useragent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"
     />
   );
 }
